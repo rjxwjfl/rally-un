@@ -1,0 +1,163 @@
+name: rally
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.2.3
+  flutter_secure_storage: ^9.2.2
+  path: ^1.9.0
+  path_provider: ^2.1.3
+  intl: ^0.19.0
+  loading_animation_widget: ^1.2.1
+  flutter_local_notifications: ^17.2.1+1
+
+  table_calendar: ^3.1.2
+  go_router: ^14.2.0
+  change_app_package_name: ^1.3.0
+  dio: ^5.5.0+1
+  image_picker: ^1.1.2
+  image_cropper: ^7.1.0
+  google_maps_flutter: ^2.7.0
+  geolocator: ^12.0.0
+  build_runner: ^2.4.11
+  go_router_builder: ^2.7.0
+  file_picker: ^8.0.6
+  flutter_riverpod: ^2.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^4.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/fonts/
+    - assets/fonts/Suite/
+    - assets/fonts/Swagger/
+    - assets/fonts/NotoSans/
+    - assets/fonts/QuickSand/
+    - assets/icons/
+    - assets/images/
+    - assets/fonts/NanumSquare/
+    - assets/fonts/NanumSquareR/
+
+  fonts:
+    - family: Swagger
+      fonts:
+        - asset: assets/fonts/Swagger/SDSwaggerTTF.ttf
+
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans/NotoSansKR-Regular.otf
+        - asset: assets/fonts/NotoSans/NotoSansKR-Thin.otf
+          weight: 100
+        - asset: assets/fonts/NotoSans/NotoSansKR-Light.otf
+          weight: 300
+        - asset: assets/fonts/NotoSans/NotoSansKR-Medium.otf
+          weight: 500
+        - asset: assets/fonts/NotoSans/NotoSansKR-Bold.otf
+          weight: 700
+        - asset: assets/fonts/NotoSans/NotoSansKR-Black.otf
+          weight: 900
+
+    - family: QuickSand
+      fonts:
+        - asset: assets/fonts/QuickSand/Quicksand-Regular.ttf
+        - asset: assets/fonts/QuickSand/Quicksand-Light.ttf
+          weight: 300
+        - asset: assets/fonts/QuickSand/Quicksand-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/QuickSand/Quicksand-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/QuickSand/Quicksand-Bold.ttf
+          weight: 700
+
+    - family: NanumSquare
+      fonts:
+        - asset: assets/fonts/NanumSquare/NanumSquareR.ttf
+        - asset: assets/fonts/NanumSquare/NanumSquareL.ttf
+          weight: 200
+        - asset: assets/fonts/NanumSquare/NanumSquareB.ttf
+          weight: 600
+        - asset: assets/fonts/NanumSquare/NanumSquareEB.ttf
+          weight: 800
+
+    - family: NanumSquareR
+      fonts:
+        - asset: assets/fonts/NanumSquareR/NanumSquareRoundR.ttf
+        - asset: assets/fonts/NanumSquareR/NanumSquareRoundL.ttf
+          weight: 200
+        - asset: assets/fonts/NanumSquareR/NanumSquareRoundB.ttf
+          weight: 600
+        - asset: assets/fonts/NanumSquareR/NanumSquareRoundEB.ttf
+          weight: 800
+
+    - family: SCoreDream
+      fonts:
+        - asset: assets/fonts/SCoreDream/SCDream3.otf
+        - asset: assets/fonts/SCoreDream/SCDream1.otf
+          weight: 100
+        - asset: assets/fonts/SCoreDream/SCDream2.otf
+          weight: 200
+        - asset: assets/fonts/SCoreDream/SCDream4.otf
+          weight: 400
+        - asset: assets/fonts/SCoreDream/SCDream5.otf
+          weight: 500
+        - asset: assets/fonts/SCoreDream/SCDream6.otf
+          weight: 600
+        - asset: assets/fonts/SCoreDream/SCDream7.otf
+          weight: 700
+        - asset: assets/fonts/SCoreDream/SCDream8.otf
+          weight: 800
+        - asset: assets/fonts/SCoreDream/SCDream9.otf
+          weight: 900
+
+    - family: SUITE
+      fonts:
+        - asset: assets/fonts/Suite/SUITE-Variable.ttf
+
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard/Pretendard-Thin.otf
+          weight: 100
+        - asset: assets/fonts/Pretendard/Pretendard-ExtraLight.otf
+          weight: 200
+        - asset: assets/fonts/Pretendard/Pretendard-Light.otf
+          weight: 300
+        - asset: assets/fonts/Pretendard/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard/Pretendard-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Pretendard/Pretendard-ExtraBold.otf
+          weight: 800
+        - asset: assets/fonts/Pretendard/Pretendard-Black.otf
+          weight: 900
