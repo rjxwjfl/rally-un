@@ -1,7 +1,7 @@
 import 'package:rally/util/data_converter.dart';
 import 'package:rally/util/datetime_convert.dart';
 
-class TodoAuthor {
+class TodoAuthorRespDto {
   int userId;
   String username;
   String displayName;
@@ -12,7 +12,7 @@ class TodoAuthor {
   DateTime latestAccess;
 
 //<editor-fold desc="Data Methods">
-  TodoAuthor({
+  TodoAuthorRespDto({
     required this.userId,
     required this.username,
     required this.displayName,
@@ -23,8 +23,8 @@ class TodoAuthor {
     required this.latestAccess,
   });
 
-  factory TodoAuthor.fromMap(Map<String, dynamic> map) {
-    return TodoAuthor(
+  factory TodoAuthorRespDto.fromMap(Map<String, dynamic> map) {
+    return TodoAuthorRespDto(
       userId: map['user_id'] as int,
       username: map['username'] as String,
       displayName: map['display_name'] as String,

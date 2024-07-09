@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:rally/model/todo/todo_model.dart';
+import 'package:rally/dto/schedule/todo/todo_resp_dto.dart';
 import 'package:rally/util/data_converter.dart';
 import 'package:rally/util/datetime_convert.dart';
 
-class ScheduleModel {
+class ScheduleRespDto {
   int schId;
   String title;
   String? desc;
@@ -12,7 +12,7 @@ class ScheduleModel {
   DateTime? endDate;
   DateTime createdDate;
   DateTime updatedDate;
-  List<TodoModel>? data;
+  List<TodoRespDto>? data;
   bool repeatFlag;
   // Repeat Type
   // 0: none, 1: daily, 2: weekly, 3: monthly, 4: yearly
@@ -24,7 +24,7 @@ class ScheduleModel {
   bool todayFlag;
 
 //<editor-fold desc="Data Methods">
-  ScheduleModel({
+  ScheduleRespDto({
     required this.schId,
     required this.title,
     this.desc,
@@ -42,7 +42,7 @@ class ScheduleModel {
     required this.todayFlag,
   });
 
-  factory ScheduleModel.fromMap(Map<String, dynamic> map) {
+  factory ScheduleRespDto.fromMap(Map<String, dynamic> map) {
     List<dynamic> todoData = map['data']?? [];
     String? weekday = map['weekday'];
     List<int>? weekdayList;
@@ -51,7 +51,7 @@ class ScheduleModel {
       weekdayList = base64Decode(weekday.split(':')[2]);
     }
 
-    return ScheduleModel(
+    return ScheduleRespDto(
       schId: map['sch_id'] as int,
       title: map['title'] as String,
       desc: map['desc'] != null ? map['desc'] as String : null,
@@ -59,7 +59,7 @@ class ScheduleModel {
       endDate: map['end_date'] != null ? sqlToDateTime(map['end_date']) : null,
       createdDate: sqlToDateTime(map['created_date']),
       updatedDate: sqlToDateTime(map['updated_date']),
-      data: todoData.map((e) => TodoModel.fromMap(e)).toList(),
+      data: todoData.map((e) => TodoRespDto.fromMap(e)).toList(),
       repeatFlag: intToBool(map['repeat_flag']),
       repeatType: map['repeat_type'] as int,
       specFlag: intToBool(map['spec_flag']),

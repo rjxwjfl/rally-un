@@ -1,36 +1,42 @@
-import 'package:rally/model/user/todo_author.dart';
+import 'package:rally/dto/user/todo_author.dart';
 import 'package:rally/util/datetime_convert.dart';
 import 'package:rally/util/todo_state.dart';
 
-class TodoModel {
+class TodoRespDto {
   int todoId;
-  TodoAuthor author;
+  TodoAuthorRespDto author;
   String title;
   String? desc;
   TodoState state;
+  DateTime? startDate;
+  DateTime? endDate;
   DateTime? completeDate;
   DateTime createdDate;
   DateTime updatedDate;
 
 //<editor-fold desc="Data Methods">
-  TodoModel({
+  TodoRespDto({
     required this.todoId,
     required this.author,
     required this.title,
     this.desc,
     required this.state,
+    this.startDate,
+    this.endDate,
     this.completeDate,
     required this.createdDate,
     required this.updatedDate,
   });
 
-  factory TodoModel.fromMap(Map<String, dynamic> map) {
-    return TodoModel(
+  factory TodoRespDto.fromMap(Map<String, dynamic> map) {
+    return TodoRespDto(
       todoId: map['todo_id'] as int,
-      author: TodoAuthor.fromMap(map['author']),
+      author: TodoAuthorRespDto.fromMap(map['author']),
       title: map['title'] as String,
       desc: map['desc'] != null ? map['desc'] as String : null,
       state: intToState(map['state']),
+      startDate: map['start_date'] != null ? sqlToDateTime(map['start_date']) : null,
+      endDate: map['end_date'] != null ? sqlToDateTime(map['end_date']) : null,
       completeDate: map['complete_date'] != null ? sqlToDateTime(map['complete_date']) : null,
       createdDate: sqlToDateTime(map['created_date']),
       updatedDate: sqlToDateTime(map['updated_date']),

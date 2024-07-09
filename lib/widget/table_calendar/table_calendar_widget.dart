@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rally/configs/style_config.dart';
-import 'package:rally/model/schedule/schedule_model.dart';
+import 'package:rally/dto/schedule/schedule_resp_dto.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
@@ -18,7 +18,7 @@ class TableCalendarWidget extends StatefulWidget {
 
   final DateTime? selectedDay;
   final DateTime focusedDay;
-  final Map<DateTime, List<ScheduleModel>>? data;
+  final Map<DateTime, List<ScheduleRespDto>>? data;
   final bool Function(DateTime)? selectedDayPredicate;
   final void Function(DateTime, DateTime)? onDaySelected;
   final void Function(DateTime)? onPageChanged;
@@ -31,7 +31,7 @@ class TableCalendarWidget extends StatefulWidget {
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
 
-  List<ScheduleModel> _getEvents(DateTime date){
+  List<ScheduleRespDto> _getEvents(DateTime date){
     DateTime day = DateTime(date.year, date.month, date.day);
     return widget.data?[day]?? [];
   }
@@ -97,7 +97,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         disabledDecoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
       ),
       calendarBuilders: CalendarBuilders(
-        markerBuilder: (BuildContext context, DateTime date, List<ScheduleModel> events) {
+        markerBuilder: (BuildContext context, DateTime date, List<ScheduleRespDto> events) {
           if (events.isEmpty) {
             return const SizedBox();
           }
