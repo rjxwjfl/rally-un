@@ -37,7 +37,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       height: 56.0,
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
       decoration: BoxDecoration(
-        color: scheme.background.withOpacity(0.9),
+        color: scheme.background,
         boxShadow: [
           BoxShadow(
             color: scheme.shadow.withOpacity(0.2),

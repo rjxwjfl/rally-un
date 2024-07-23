@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:intl/intl.dart';
 
 String defaultFormat(DateTime date) =>
     DateFormat('yyyy. MM. dd. hh:mm').format(date);
+
+String todoTimeFormat(DateTime date) => DateFormat('a hh:mm', Platform.localeName).format(date);
 
 String sqlDateFormat(DateTime date) {
   DateTime utcTime = date.toUtc();

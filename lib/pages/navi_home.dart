@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rally/configs/style_config.dart';
-import 'package:rally/pages/components/bottom_navigation/navigation_items.dart';
-import 'package:rally/pages/schedule/schedule_view.dart';
-import 'package:rally/widget/custom_bottom_navigation_bar/components/navigation_item.dart';
+import 'package:rally/pages/components/bottom_navigation/navigation_components.dart';
 import 'package:rally/widget/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart';
 
 class NaviHome extends StatefulWidget {

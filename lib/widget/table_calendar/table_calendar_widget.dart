@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rally/configs/style_config.dart';
 import 'package:rally/dto/schedule/schedule_resp_dto.dart';
+import 'package:rally/dto/schedule/todo/todo_resp_dto.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
@@ -18,7 +19,7 @@ class TableCalendarWidget extends StatefulWidget {
 
   final DateTime? selectedDay;
   final DateTime focusedDay;
-  final Map<DateTime, List<ScheduleRespDto>>? data;
+  final Map<DateTime, List<TodoRespDto>>? data;
   final bool Function(DateTime)? selectedDayPredicate;
   final void Function(DateTime, DateTime)? onDaySelected;
   final void Function(DateTime)? onPageChanged;
@@ -31,7 +32,7 @@ class TableCalendarWidget extends StatefulWidget {
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
 
-  List<ScheduleRespDto> _getEvents(DateTime date){
+  List<TodoRespDto> _getEvents(DateTime date){
     DateTime day = DateTime(date.year, date.month, date.day);
     return widget.data?[day]?? [];
   }
@@ -97,7 +98,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         disabledDecoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
       ),
       calendarBuilders: CalendarBuilders(
-        markerBuilder: (BuildContext context, DateTime date, List<ScheduleRespDto> events) {
+        markerBuilder: (BuildContext context, DateTime date, List<TodoRespDto> events) {
           if (events.isEmpty) {
             return const SizedBox();
           }
@@ -108,13 +109,13 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // if (per.isNotEmpty)
-                Container(
-                  height: 5.0,
-                  width: 5.0,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                ),
+                // Container(
+                //   height: 5.0,
+                //   width: 5.0,
+                //   decoration: BoxDecoration(
+                //     shape: BoxShape.circle,
+                //   ),
+                // ),
                 // if (per.isNotEmpty && group.isNotEmpty) SizedBox(width: 2.0),
                 // if (group.isNotEmpty)
                 Container(

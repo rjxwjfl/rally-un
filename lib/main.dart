@@ -3,7 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:rally/app_init.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rally/state_manager/riverpod/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+final themeProvider = ChangeNotifierProvider((ref) => ThemeProvider());
 
 // global navigator context key
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -24,5 +28,5 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  await initializeDateFormatting().then((_) => runApp(const AppInit()));
+  await initializeDateFormatting().then((_) => runApp(const ProviderScope(child: AppInit())));
 }

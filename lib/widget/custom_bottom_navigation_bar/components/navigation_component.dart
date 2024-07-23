@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:rally/widget/custom_bottom_navigation_bar/components/navigation_item.dart';
 import 'package:rally/widget/non_glow_inkwell.dart';
@@ -6,11 +5,11 @@ import 'package:rally/widget/non_glow_inkwell.dart';
 class NavigationComponent extends StatelessWidget {
   const NavigationComponent(
       {required this.onTap,
-        required this.item,
-        required this.isSelected,
-        required this.activeColor,
-        required this.inactiveColor,
-        super.key});
+      required this.item,
+      required this.isSelected,
+      required this.activeColor,
+      required this.inactiveColor,
+      super.key});
 
   final VoidCallback onTap;
   final NavigationItem item;
@@ -29,7 +28,8 @@ class NavigationComponent extends StatelessWidget {
             height: 4.0,
             width: isSelected ? 25.0 : 0.0,
             duration: const Duration(milliseconds: 200),
-            decoration: BoxDecoration(color: scheme.primary, borderRadius: const BorderRadius.all(Radius.circular(2.0))),
+            decoration:
+                BoxDecoration(color: scheme.secondary, borderRadius: const BorderRadius.all(Radius.circular(2.0))),
           ),
           Stack(
             children: [
@@ -47,7 +47,7 @@ class NavigationComponent extends StatelessWidget {
                   child: item.notification!,
                 ),
             ],
-          )
+          ),
         ],
       ),
     );
