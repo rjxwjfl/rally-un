@@ -17,8 +17,11 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) {
+    ColorScheme scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: scheme.background,
+      ),
       body: Consumer(builder: (context, ref, _) {
         var themeRef = ref.watch(themeProvider);
         return Column(

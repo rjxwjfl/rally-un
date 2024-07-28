@@ -18,7 +18,7 @@ class PriorityIndicator extends StatelessWidget {
         width: width ?? 12.0,
         height: height ?? 12.0,
         decoration: BoxDecoration(
-          color: priorityColor(priority: priority),
+          color: priorityColorBuilder(priority: priority),
           borderRadius: const BorderRadius.all(Radius.circular(2.0)),
         ),
       ),

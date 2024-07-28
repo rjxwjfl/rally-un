@@ -25,7 +25,7 @@ class AuthorDateIndicator extends StatelessWidget {
                 color: scheme.outline,
               ),
             ),
-            Text(defaultFormat(date))
+            Text(ymdFormatter(date))
           ],
         ),
       ],

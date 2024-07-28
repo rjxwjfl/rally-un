@@ -28,9 +28,6 @@ class _ScheduleViewState extends State<ScheduleView> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
   int _sortType = 0;
   bool _isAscending = true;
-  bool _schExpanded = true;
-  bool _persExpanded = true;
-  bool _groupExpanded = true;
 
   void _onFormatChanged(CalendarFormat format) {
     setState(() {

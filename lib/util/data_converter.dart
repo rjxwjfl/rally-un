@@ -11,27 +11,27 @@ int boolToInt (bool flag){
   return map[flag]!;
 }
 
-Color priorityColor({required int priority}) {
+Color priorityColorBuilder({required int priority}) {
   const map = {
-    0: Color(0xFFA5D6F3), // Low Priority (연한 그린)
-    1: Color(0xFFFFE082), // Medium Priority (연한 노랑)
-    2: Color(0xFFFF8A80) // High Priority (연한 빨강)
+    0: Color(0xFF3191D9), // Low Priority (연한 그린)
+    1: Color(0xFFEFA018), // Medium Priority (연한 노랑)
+    2: Color(0xFFE8645A) // High Priority (연한 빨강)
   };
 
   return map[priority]!;
 }
 
-Icon stateIcon({required TodoState state}) {
-  const map = {
-    TodoState.pending: Icon(
+Icon stateIcon({required int state, double? size}) {
+  var map = {
+    0: Icon(
       Icons.more_horiz_rounded,
-      color: Colors.grey,
-      size: 32.0,
+      color: Colors.black87,
+      size: size ?? 32.0,
     ),
-    TodoState.complete: Icon(
+    1: Icon(
       Icons.check,
-      color: Colors.green,
-      size: 32.0,
+      color: Colors.black87,
+      size: size ?? 32.0,
     )
   };
   return map[state]!;

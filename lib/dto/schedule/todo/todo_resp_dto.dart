@@ -10,7 +10,7 @@ class TodoRespDto {
   String? desc;
   int priority;
   bool setTimeFlag;
-  TodoState state;
+  int state;
   DateTime startDate;
   DateTime endDate;
   DateTime? completeDate;
@@ -41,7 +41,7 @@ class TodoRespDto {
       desc: map['desc'] != null ? map['desc'] as String : null,
       priority: map['priority'] as int,
       setTimeFlag: intToBool(map['set_time_flag']),
-      state: intToState(map['state']),
+      state: map['state'] as int,
       startDate: sqlToDateTime(map['start_date']),
       endDate: sqlToDateTime(map['end_date']),
       completeDate: map['complete_date'] != null ? sqlToDateTime(map['complete_date']) : null,

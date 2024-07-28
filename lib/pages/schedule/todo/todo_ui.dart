@@ -22,7 +22,7 @@ class _TodoUiState extends State<TodoUi> {
   Future<void> _completeTodo() async {
     NotificationSnackBar snackBar = NotificationSnackBar(context);
 
-    if (widget.data.state != TodoState.complete) {
+    if (widget.data.state != 1) {
       return snackBar.notification(text: '일정을 완료했습니다.');
     }
     return;
@@ -39,24 +39,16 @@ class _TodoUiState extends State<TodoUi> {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 80.0),
       child: InkWell(
-        onTap: () => scheduleTodoBottomSheet(context: context, child: TodoDetailBottomSheet(data: widget.data)),
+        onTap: () => FormedBottomSheet.flexibleBottomSheet(context: context, builder: (context, ctrl, offset) => TodoDetailBottomSheet(data: widget.data, controller: ctrl)),
         borderRadius: const BorderRadius.all(Radius.circular(4.0)),
         child: Ink(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                Container(
-                  width: 12.0,
-                  height: 12.0,
-                  decoration: BoxDecoration(
-                    color: priorityColor(priority: widget.data.priority),
-                    borderRadius: const BorderRadius.all(Radius.circular(2.0)),
-                  ),
-                ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -88,19 +80,21 @@ class _TodoUiState extends State<TodoUi> {
                     ),
                   ),
                 ),
+                SizedBox(width: 16.0),
                 InkWell(
                   onTap: () {
                     print(DateTime.now());
                   },
-                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(24.0)),
                   child: Ink(
                     decoration: BoxDecoration(
-                      border: Border.all(color: scheme.outline, width: 0.2),
-                      borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        color: priorityColorBuilder(priority: widget.data.priority),
+                        border: Border.all(color: Colors.white30),
+                        shape: BoxShape.circle
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(2.0),
-                      child: stateIcon(state: widget.data.state),
+                      child: stateIcon(state: widget.data.state, size: 24.0),
                     ),
                   ),
                 ),
