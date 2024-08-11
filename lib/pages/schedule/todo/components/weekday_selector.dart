@@ -19,7 +19,7 @@ class WeekdaySelectIndicator extends StatelessWidget {
         child: Container(
           height: 35.0,
           width: 35.0,
-          decoration: BoxDecoration(color: isSelected ? scheme.primary : scheme.surface, shape: BoxShape.circle, boxShadow: [
+          decoration: BoxDecoration(color: isSelected ? scheme.primary : scheme.outline, shape: BoxShape.circle, boxShadow: [
             BoxShadow(color: scheme.shadow.withOpacity(0.3), spreadRadius: 0.0, blurRadius: 2.0, offset: const Offset(0, 2.0))
           ]),
           child: Center(

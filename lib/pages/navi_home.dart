@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rally/configs/style_config.dart';
+import 'package:rally/main.dart';
 import 'package:rally/pages/components/bottom_navigation/navigation_components.dart';
+import 'package:rally/pages/schedule/todo/todo_add_bottom_sheet.dart';
+import 'package:rally/widget/bottom_sheet/schedule_todo_bottom_sheet.dart';
 import 'package:rally/widget/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart';
 
 class NaviHome extends StatefulWidget {
@@ -14,13 +17,13 @@ class NaviHome extends StatefulWidget {
 class _NaviHomeState extends State<NaviHome> {
   late final PageController _pageController;
   late int _currentIndex;
+  late final List<Widget> _actionButtonItems;
 
   Future<bool> _onWillPop(BuildContext context) async {
     bool? res = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
         content: Text('# Teminate message'),
         contentTextStyle: StyleConfigs.bodyNormal,
         actions: [
@@ -30,7 +33,7 @@ class _NaviHomeState extends State<NaviHome> {
           ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text('No'),
+            child: Text('Yes'),
           ),
         ],
       ),
@@ -54,12 +57,14 @@ class _NaviHomeState extends State<NaviHome> {
   void initState() {
     _currentIndex = 0;
     _pageController = PageController(initialPage: _currentIndex);
-
+    _actionButtonItems = [];
+    sqflite.initStorage();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    ColorScheme scheme = Theme.of(context).colorScheme;
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
@@ -85,6 +90,43 @@ class _NaviHomeState extends State<NaviHome> {
           iconSize: 24.0,
           pageController: _pageController,
           items: navigationItems,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => FormedBottomSheet.defaultBottomSheet(
+            context: context,
+            builder: (context) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _getActionButton(onTap: () {}, icon: Icons.edit_outlined, text: '메모'),
+                _getActionButton(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    FormedBottomSheet.defaultBottomSheet(context: context, builder: (context) => const TodoAddBottomSheet());
+                  },
+                  icon: Icons.add_task_outlined,
+                  text: '할 일',
+                ),
+                _getActionButton(onTap: () {}, icon: Icons.edit_calendar_outlined, text: '일정'),
+              ],
+            ),
+          ),
+          mini: true,
+          child: Icon(Icons.add),
+        ),
+      ),
+    );
+  }
+
+  Widget _getActionButton({required void Function() onTap, required IconData icon, required String text}) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(text, style: StyleConfigs.bodyNormal),
+          ],
         ),
       ),
     );

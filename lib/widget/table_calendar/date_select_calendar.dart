@@ -1,76 +1,60 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rally/configs/style_config.dart';
-import 'package:rally/dto/schedule/todo/internal_todo_resp_dto.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class TableCalendarWidget extends StatefulWidget {
-  const TableCalendarWidget(
+class DateSelectCalendar extends StatefulWidget {
+  const DateSelectCalendar(
       {this.selectedDay,
-      required this.focusedDay,
-      this.data,
-      this.selectedDayPredicate,
-      this.onDaySelected,
-      this.onPageChanged,
-      this.onFormatChanged,
-      required this.calendarFormat,
-      super.key});
+        required this.focusedDay,
+        this.selectedDayPredicate,
+        this.onDaySelected,
+        this.onPageChanged,
+        super.key});
 
   final DateTime? selectedDay;
   final DateTime focusedDay;
-  final Map<DateTime, List<InternalTodoRespDto>>? data;
   final bool Function(DateTime)? selectedDayPredicate;
   final void Function(DateTime, DateTime)? onDaySelected;
   final void Function(DateTime)? onPageChanged;
-  final void Function(CalendarFormat)? onFormatChanged;
-  final CalendarFormat calendarFormat;
 
   @override
-  State<TableCalendarWidget> createState() => _TableCalendarWidgetState();
+  State<DateSelectCalendar> createState() => _DateSelectCalendarState();
 }
 
-class _TableCalendarWidgetState extends State<TableCalendarWidget> {
-
-  List<InternalTodoRespDto> _getEvents(DateTime date){
-    DateTime day = DateTime(date.year, date.month, date.day);
-    return widget.data?[day]?? [];
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
+class _DateSelectCalendarState extends State<DateSelectCalendar> {
 
   @override
   Widget build(BuildContext context) {
     ColorScheme scheme = Theme.of(context).colorScheme;
     return TableCalendar(
-      locale: 'ko_KR',
+      locale: Platform.localeName,
       daysOfWeekHeight: 25.0,
-      rowHeight: 50.0,
-      calendarFormat: widget.calendarFormat,
+      rowHeight: 45.0,
+      calendarFormat: CalendarFormat.month,
       focusedDay: widget.focusedDay,
-      firstDay: DateTime(2020, 1, 1),
+      firstDay: DateTime.now(),
       lastDay: DateTime(2100, 12, 31),
-      eventLoader: _getEvents,
       daysOfWeekStyle: DaysOfWeekStyle(
         weekdayStyle: StyleConfigs.bodyNormal.copyWith(color: scheme.outline),
         weekendStyle: StyleConfigs.bodyNormal.copyWith(color: Colors.red.withOpacity(0.5)),
       ),
-      headerVisible: false,
+      headerVisible: true,
       headerStyle: HeaderStyle(
         titleCentered: true,
         titleTextFormatter: (date, locale) => DateFormat.yMMMMd(locale).format(date),
         titleTextStyle: StyleConfigs.subtitleNormal,
-        leftChevronPadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+        leftChevronPadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
         leftChevronMargin: EdgeInsets.zero,
-        rightChevronPadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+        rightChevronPadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
         rightChevronMargin: EdgeInsets.zero,
-        headerPadding: const EdgeInsets.symmetric(vertical: 2.0),
+        headerPadding: const EdgeInsets.symmetric(vertical: 4.0),
         formatButtonVisible: false,
       ),
       calendarStyle: CalendarStyle(
-        tablePadding: EdgeInsets.zero,
+        tablePadding: const EdgeInsets.only(bottom: 12.0),
         cellMargin: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
         markersAlignment: Alignment.bottomCenter,
         weekNumberTextStyle: StyleConfigs.bodyNormal,
@@ -91,49 +75,14 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         defaultDecoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
         withinRangeTextStyle: StyleConfigs.bodyNormal,
         withinRangeDecoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        outsideTextStyle: StyleConfigs.bodyNormal.copyWith(color: scheme.outline.withOpacity(0.5)),
+        outsideTextStyle: StyleConfigs.bodyNormal,
         outsideDecoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        disabledTextStyle: StyleConfigs.bodyNormal.copyWith(color: scheme.outline.withOpacity(0.5)),
+        disabledTextStyle: StyleConfigs.bodyNormal.copyWith(color: scheme.outline.withOpacity(0.2)),
         disabledDecoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
-      ),
-      calendarBuilders: CalendarBuilders(
-        markerBuilder: (BuildContext context, DateTime date, List<InternalTodoRespDto> events) {
-          if (events.isEmpty) {
-            return const SizedBox();
-          }
-
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // if (per.isNotEmpty)
-                // Container(
-                //   height: 5.0,
-                //   width: 5.0,
-                //   decoration: BoxDecoration(
-                //     shape: BoxShape.circle,
-                //   ),
-                // ),
-                // if (per.isNotEmpty && group.isNotEmpty) SizedBox(width: 2.0),
-                // if (group.isNotEmpty)
-                Container(
-                  height: 5.0,
-                  width: 5.0,
-                  decoration: BoxDecoration(
-                    color: scheme.secondary,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
       ),
       selectedDayPredicate: widget.selectedDayPredicate,
       onDaySelected: widget.onDaySelected,
       onPageChanged: widget.onPageChanged,
-      onFormatChanged: widget.onFormatChanged,
     );
   }
 }

@@ -1,21 +1,19 @@
 class TodoEditModel {
   DateTime startDate;
   DateTime endDate;
-  bool isRepeat;
-  int repeatType;
-  int frequency;
-  List<int> weekday;
-  bool isSpecDay;
+  bool? isTimeSelected;
+
   // Repeat Type
   // 0 : normal, 1: daily, 2: weekly, 3: monthly, 4: yearly
 
   TodoEditModel({
     required this.startDate,
     required this.endDate,
-    required this.isRepeat,
-    required this.repeatType,
-    required this.frequency,
-    required this.weekday,
-    required this.isSpecDay,
+    this.isTimeSelected = false,
   });
+
+  @override
+  String toString() {
+    return 'TodoEditModel{startDate: $startDate, endDate: $endDate, isTimeSelected: $isTimeSelected}';
+  }
 }

@@ -1,10 +1,13 @@
-import 'package:rally/dto/schedule/todo/todo_resp_dto.dart';
+import 'dart:io';
+import 'dart:ui';
 
-Map<DateTime, List<TodoRespDto>> todoDataFormer(List<TodoRespDto>? data) {
-  Map<DateTime, List<TodoRespDto>> map = {};
+import 'package:rally/dto/schedule/todo/internal_todo_resp_dto.dart';
+
+Map<DateTime, List<InternalTodoRespDto>> todoDataFormer(List<InternalTodoRespDto>? data) {
+  Map<DateTime, List<InternalTodoRespDto>> map = {};
 
   if (data != null) {
-    for (TodoRespDto todo in data) {
+    for (InternalTodoRespDto todo in data) {
       DateTime date = todo.startDate;
       DateTime dateKey = DateTime(date.year, date.month, date.day);
 
@@ -12,4 +15,14 @@ Map<DateTime, List<TodoRespDto>> todoDataFormer(List<TodoRespDto>? data) {
     }
   }
   return map;
+}
+
+Locale getLocale() {
+  String localeName = Platform.localeName;
+  List<String> parts = localeName.split('_');
+  if (parts.length == 2) {
+    return Locale(parts[0], parts[1]);
+  } else {
+    return Locale(parts[0]);
+  }
 }

@@ -62,7 +62,7 @@ class _TitleTextFieldState extends State<TitleTextField> {
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
                 hintText: widget.hintText,
-                hintStyle: StyleConfigs.bodyNormal.copyWith(color: scheme.outline),
+                hintStyle: widget.style ?? StyleConfigs.bodyNormal.copyWith(color: scheme.outline),
                 enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
                 disabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
                 focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),

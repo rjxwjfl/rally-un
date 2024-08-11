@@ -1,9 +1,7 @@
-import 'package:rally/dto/user/todo_author.dart';
 import 'package:rally/util/datetime_convert.dart';
 
-class TodoRespDto {
+class InternalTodoRespDto {
   int todoId;
-  AuthorRespDto author;
   String title;
   String? desc;
   int priority;
@@ -13,11 +11,15 @@ class TodoRespDto {
   DateTime? completeDate;
   DateTime createdDate;
   DateTime updatedDate;
+  String storageTitle;
+  int icon;
+  int type;
+  DateTime storageCreatedDate;
+  DateTime storageUpdatedDate;
 
-//<editor-fold desc="Data Methods">
-  TodoRespDto({
+  //<editor-fold desc="Data Methods">
+  InternalTodoRespDto({
     required this.todoId,
-    required this.author,
     required this.title,
     this.desc,
     required this.priority,
@@ -27,12 +29,16 @@ class TodoRespDto {
     this.completeDate,
     required this.createdDate,
     required this.updatedDate,
+    required this.storageTitle,
+    required this.icon,
+    required this.type,
+    required this.storageCreatedDate,
+    required this.storageUpdatedDate,
   });
 
-  factory TodoRespDto.fromMap(Map<String, dynamic> map) {
-    return TodoRespDto(
+  factory InternalTodoRespDto.fromMap(Map<String, dynamic> map) {
+    return InternalTodoRespDto(
       todoId: map['todo_id'] as int,
-      author: AuthorRespDto.fromMap(map['author']),
       title: map['title'] as String,
       desc: map['desc'] != null ? map['desc'] as String : null,
       priority: map['priority'] as int,
@@ -42,6 +48,11 @@ class TodoRespDto {
       completeDate: map['complete_date'] != null ? sqlToDateTime(map['complete_date']) : null,
       createdDate: sqlToDateTime(map['created_date']),
       updatedDate: sqlToDateTime(map['updated_date']),
+      storageTitle: map['storage_title'] as String,
+      icon: map['icon'] as int,
+      type: map['type'] as int,
+      storageCreatedDate: sqlToDateTime(map['storage_created_date']),
+      storageUpdatedDate: sqlToDateTime(map['storage_updated_date']),
     );
   }
 

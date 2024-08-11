@@ -2,21 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:rally/dto/schedule/todo/replica_gen_model.dart';
 import 'package:rally/dto/schedule/todo/replica_date_model.dart';
-import 'package:rally/dto/schedule/todo/todo_req_dto.dart';
+import 'package:rally/dto/schedule/todo/replica_gen_model.dart';
+import 'package:rally/dto/schedule/todo/repeat_todo_req_dto.dart';
 import 'package:rally/dto/user/user_data_resp_dto.dart';
 import 'package:rally/pages/schedule/components/clone_generator.dart';
 import 'package:rally/pages/schedule/todo/components/date_picker_button.dart';
 import 'package:rally/pages/schedule/todo/components/item_option_button.dart';
-import 'package:rally/pages/schedule/todo/components/repeat_dialog.dart';
+import 'package:rally/pages/schedule/todo/components/item_option_switch.dart';
 import 'package:rally/pages/schedule/todo/components/repeat_model.dart';
 import 'package:rally/pages/schedule/todo_user_add_view.dart';
-import 'package:rally/widget/indicator/result_indicator.dart';
 import 'package:rally/widget/indicator/user/horizontal_user_indicator.dart';
 import 'package:rally/widget/non_glow_inkwell.dart';
 import 'package:rally/widget/notification/notification_snack_bar.dart';
-import 'package:rally/pages/schedule/todo/components/item_option_switch.dart';
 import 'package:rally/widget/text_field/title_text_field.dart';
 
 class ScheduleCreateView extends StatefulWidget {
@@ -97,7 +95,7 @@ class _ScheduleCreateViewState extends State<ScheduleCreateView> {
       ),
     );
 
-    TodoReqDto? todo = TodoReqDto(
+    RepeatTodoReqDto? todo = RepeatTodoReqDto(
       replica: replica,
       repeatFlag: _repeatFlag,
       repeatType: _repeatType,
@@ -441,75 +439,6 @@ class _ScheduleCreateViewState extends State<ScheduleCreateView> {
                         ),
                     ],
                   ),
-                  if (_repeatFlag)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ItemOptionButton(
-                          onTap: () async {
-                            FocusScope.of(context).requestFocus(FocusNode());
-                            RepeatModel? data = await showDialog(
-                              context: context,
-                              builder: (context) => RepeatDialog(
-                                frequency: _frequency,
-                                currentType: _repeatType!,
-                                selectedWeekday: _selectedWeekday,
-                                weekdayFlag: _weekdayFlag,
-                                scheduleStart: _scheduleStart,
-                                scheduleEnd: _scheduleEnd,
-                                isDay: _specFlag,
-                              ),
-                            );
-                            if (data != null) {
-                              setState(() {
-                                _frequency = data.frequency;
-                                _repeatType = data.currentType;
-                                _scheduleEnd = data.scheduleEnd;
-
-                                if (data.currentType == 1) {
-                                  _weekdayFlag = List.from(data.weekdayFlag!);
-                                  _selectedWeekday = List.from(data.selectedWeekday!);
-                                }
-
-                                if (data.currentType > 1) {
-                                  _specFlag = data.isDay!;
-                                }
-                              });
-                            }
-                          },
-                          titleText: '반복 유형',
-                          icon: Icons.event_repeat,
-                          contentText: repeatString(
-                            repeatFlag: _repeatFlag,
-                            frequency: _frequency,
-                            repeatType: _repeatType!,
-                            scheduleStart: _scheduleStart,
-                            isSpecificDay: _specFlag,
-                            weeks: _selectedWeekday,
-                          ),
-                        ),
-                        ItemOptionButton(
-                          onTap: () async {
-                            FocusScope.of(context).requestFocus(FocusNode());
-                            DateTime? date = await showDatePicker(
-                              context: context,
-                              initialDate: _scheduleEnd,
-                              firstDate: _scheduleStart.add(const Duration(days: 1)),
-                              lastDate: DateTime(2100, 12, 31),
-                            );
-                            if (date != null) {
-                              setState(() {
-                                _repeatEnd = date.copyWith(hour: _expirationTime.hour, minute: _expirationTime.minute);
-                                _scheduleEnd = _repeatEnd;
-                              });
-                            }
-                          },
-                          titleText: '반복 종료',
-                          icon: Icons.access_time_filled_rounded,
-                          contentText: DateFormat(DateFormat.YEAR_MONTH_DAY, 'ko_KR').format(_scheduleEnd),
-                        ),
-                      ],
-                    ),
                 ],
               ),
               const Divider(thickness: 0.1),

@@ -1,62 +1,53 @@
-
-import 'package:rally/dto/schedule/todo/replica_date_model.dart';
-import 'package:rally/util/data_converter.dart';
+import 'package:rally/util/datetime_convert.dart';
 
 class TodoReqDto {
-  List<ReplicaDateModel> replica;
-  bool repeatFlag;
-  int? repeatType;
-  int? frequency;
-  List<int>? weekday;
-  bool? allDayFlag;
-  bool? todayFlag;
-  bool? specFlag;
+  String title;
+  String? desc;
+  int priority;
+  int state;
+  DateTime startDate;
+  DateTime endDate;
+  DateTime? completedDate;
 
-//<editor-fold desc="Data Methods">
   TodoReqDto({
-    required this.replica,
-    required this.repeatFlag,
-    this.repeatType,
-    this.frequency,
-    this.weekday,
-    this.allDayFlag,
-    this.todayFlag,
-    this.specFlag,
+    required this.title,
+    this.desc,
+    required this.priority,
+    required this.state,
+    required this.startDate,
+    required this.endDate,
+    this.completedDate,
   });
-
-  TodoReqDto copyWith({
-    List<ReplicaDateModel>? replica,
-    bool? repeatFlag,
-    int? repeatType,
-    int? frequency,
-    List<int>? weekday,
-    bool? allDayFlag,
-    bool? todayFlag,
-    bool? specFlag,
-  }) {
-    return TodoReqDto(
-      replica: replica ?? this.replica,
-      repeatFlag: repeatFlag ?? this.repeatFlag,
-      repeatType: repeatType ?? this.repeatType,
-      frequency: frequency ?? this.frequency,
-      weekday: weekday ?? this.weekday,
-      allDayFlag: allDayFlag ?? this.allDayFlag,
-      todayFlag: todayFlag ?? this.todayFlag,
-      specFlag: specFlag ?? this.specFlag,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
-      'replica': replica.map((e) => e.toMap()).toList(),
-      'repeatFlag': boolToInt(repeatFlag),
-      'repeatType': repeatType,
-      'frequency': frequency,
-      'weekday': weekday,
-      'alldayFlag': allDayFlag != null ? boolToInt(allDayFlag!) : null,
-      'todayFlag': todayFlag != null ? boolToInt(todayFlag!) : null,
-      'specFlag': specFlag != null ? boolToInt(specFlag!) : null,
+      'title': title,
+      'desc': desc,
+      'priority': priority,
+      'state': state,
+      'start_date': sqlDateFormat(startDate),
+      'end_date': sqlDateFormat(endDate),
+      'completed_date': completedDate != null ? sqlDateFormat(completedDate!) : null,
     };
   }
-//</editor-fold>
+
+  TodoReqDto copyWith({
+    String? title,
+    String? desc,
+    int? priority,
+    int? state,
+    DateTime? startDate,
+    DateTime? endDate,
+    DateTime? completedDate,
+  }) {
+    return TodoReqDto(
+      title: title ?? this.title,
+      desc: desc ?? this.desc,
+      priority: priority ?? this.priority,
+      state: state ?? this.state,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      completedDate: completedDate ?? this.completedDate,
+    );
+  }
 }

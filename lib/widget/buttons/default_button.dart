@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class DefaultButton extends StatelessWidget {
-  const DefaultButton({required this.onTap, this.color, this.borderRadius, this.padding, required this.child, super.key});
+class CustomFilledButton extends StatelessWidget {
+  const CustomFilledButton(
+      {required this.onTap, this.borderRadius, this.color, this.borderColor, this.padding, required this.child, super.key});
 
   final VoidCallback onTap;
-  final Color? color;
   final BorderRadius? borderRadius;
+  final Color? color;
+  final Color? borderColor;
   final EdgeInsets? padding;
   final Widget child;
 
@@ -20,6 +22,7 @@ class DefaultButton extends StatelessWidget {
         child: Ink(
           decoration: BoxDecoration(
             color: color ?? scheme.primaryContainer,
+            border: Border.all(color: borderColor ?? Colors.transparent),
             borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(8.0)),
           ),
           child: Padding(

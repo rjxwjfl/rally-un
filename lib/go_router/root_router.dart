@@ -10,7 +10,7 @@ final GoRouter rootRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const TodayScheduleView(),
+      builder: (context, state) => NaviHome(),
       routes: [],
     ),
   ],

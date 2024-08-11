@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rally/configs/style_config.dart';
+import 'package:rally/dto/schedule/todo/internal_todo_resp_dto.dart';
 import 'package:rally/dto/schedule/todo/todo_resp_dto.dart';
 import 'package:rally/util/data_converter.dart';
 import 'package:rally/util/datetime_convert.dart';
@@ -14,7 +15,7 @@ import 'package:rally/widget/text_field/title_text_field.dart';
 class TodoDetailBottomSheet extends StatefulWidget {
   const TodoDetailBottomSheet({required this.data, required this.controller, super.key});
 
-  final TodoRespDto data;
+  final InternalTodoRespDto data;
   final ScrollController controller;
 
   @override
@@ -90,7 +91,7 @@ class _TodoDetailBottomSheetState extends State<TodoDetailBottomSheet> {
               ),
             ),
             // 작성자가 본인일 경우 편집이 가능해야함.
-            if (widget.data.author.userId == 1)
+            // if (widget.data.author.userId == 1)
               Column(
                 children: [
                   TitleTextField(
@@ -109,31 +110,31 @@ class _TodoDetailBottomSheetState extends State<TodoDetailBottomSheet> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   ),
                 ],
-              )
-            else
-              // 본인이 아닐 경우 읽기 전용
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  IconTextBox(
-                    text: widget.data.title,
-                    icon: Icons.edit_calendar_rounded,
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    style: StyleConfigs.leadMed.copyWith(color: scheme.primary),
-                  ),
-                  if (widget.data.desc != null)
-                    FlexibleTextBox(
-                      text: widget.data.desc!,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    )
-                ],
               ),
-            if (widget.data.author.userId != 1)
-              IconTextBox(
-                text: widget.data.author.displayName,
-                icon: Icons.person_pin_outlined,
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              ),
+            // else
+            //   // 본인이 아닐 경우 읽기 전용
+            //   Column(
+            //     crossAxisAlignment: CrossAxisAlignment.stretch,
+            //     children: [
+            //       IconTextBox(
+            //         text: widget.data.title,
+            //         icon: Icons.edit_calendar_rounded,
+            //         padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            //         style: StyleConfigs.leadMed.copyWith(color: scheme.primary),
+            //       ),
+            //       if (widget.data.desc != null)
+            //         FlexibleTextBox(
+            //           text: widget.data.desc!,
+            //           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            //         )
+            //     ],
+            //   ),
+            // if (widget.data.author.userId != 1)
+            //   IconTextBox(
+            //     text: widget.data.author.displayName,
+            //     icon: Icons.person_pin_outlined,
+            //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            //   ),
             // FormedWidgetComponent(
             //   title: Text('하위 일정 추가', style: StyleConfigs.bodyMed),
             //   suffix: IconButton(onPressed: () {}, icon: const Icon(Icons.add, size: 18.0)),

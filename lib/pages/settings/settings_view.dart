@@ -47,8 +47,7 @@ class _SettingsViewState extends State<SettingsView> {
               isEnd: true,
               text: '로그아웃',
               icon: Icons.logout_rounded,
-              onTap: () {
-              },
+              onTap: () {},
               // () => _repository.googleSignOut(),
             ),
           ],
@@ -56,6 +55,7 @@ class _SettingsViewState extends State<SettingsView> {
       }),
     );
   }
+
   Widget getTitleUI({required BuildContext context, required String text}) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -74,18 +74,18 @@ class _SettingsViewState extends State<SettingsView> {
 
   Widget itemUI(
       {required BuildContext context,
-        required String text,
-        required IconData icon,
-        required VoidCallback? onTap,
-        bool isEnd = false}) {
+      required String text,
+      required IconData icon,
+      required VoidCallback? onTap,
+      bool isEnd = false}) {
     return InkWell(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
             border: isEnd
                 ? Border(
-              bottom: BorderSide(color: Theme.of(context).colorScheme.secondary),
-            )
+                    bottom: BorderSide(color: Theme.of(context).colorScheme.secondary),
+                  )
                 : null),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 24.0),
@@ -123,31 +123,25 @@ class _SettingsViewState extends State<SettingsView> {
         child: Row(
           children: [
             const Icon(Icons.dark_mode_rounded, size: 18.0),
-            const SizedBox(width: 15.0),
+            const SizedBox(width: 12.0),
             Expanded(
-              child: Text(
-                '밝기',
-                style: StyleConfigs.bodyNormal,
-              ),
+              child: Text('밝기', style: StyleConfigs.bodyNormal),
             ),
-            AnimatedToggleSwitch.rolling(
+            AnimatedToggleSwitch.size(
               height: 40.0,
+              indicatorSize: const Size.fromWidth(38.0),
               current: themeRef.modeToInt(themeRef.currentMode),
               values: const [0, 1, 2],
               onChanged: (value) {
                 themeRef.switchThemeMode(value);
               },
               iconList: [
-                Icon(Icons.light_mode, color: Colors.yellow.shade800),
-                Icon(Icons.dark_mode, color: Colors.blue.shade800),
-                Icon(Icons.brightness_auto_rounded, color: Colors.deepPurple.shade800),
+                Icon(Icons.light_mode, color: Colors.yellow.shade800, size: 18.0),
+                Icon(Icons.dark_mode, color: Colors.blue.shade800, size: 18.0),
+                Icon(Icons.brightness_auto_rounded, color: Colors.deepPurple.shade800, size: 18.0),
               ],
-              borderWidth: 0.5,
-              style: ToggleStyle(
-                  borderColor: scheme.outline.withOpacity(0.3),
-                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                  indicatorColor: scheme.surface,
-                  backgroundColor: scheme.secondaryContainer),
+              borderWidth: 1.0,
+
             ),
           ],
         ),

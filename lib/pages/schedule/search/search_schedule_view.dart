@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:rally/dto/schedule/todo/internal_todo_resp_dto.dart';
 import 'package:rally/dto/schedule/todo/todo_resp_dto.dart';
+import 'package:rally/main.dart';
 import 'package:rally/pages/components/sample/todo_sample.dart';
 import 'package:rally/pages/schedule/todo/todo_ui.dart';
 import 'package:rally/pages/schedule/search/components/search_bar.dart';
@@ -14,20 +16,11 @@ class SearchScheduleView extends StatefulWidget {
 }
 
 class _SearchScheduleViewState extends State<SearchScheduleView> {
-  late final StreamController<List<TodoRespDto>> _streamController;
+  late final StreamController<List<InternalTodoRespDto>> _streamController;
   late final TextEditingController _controller;
   late final FocusNode _node;
-  List<TodoRespDto> _todoList = [];
+  List<InternalTodoRespDto> _todoList = [];
   String? _keyword;
-
-  void _setList() {
-    if (_keyword != null && _keyword!.isNotEmpty) {
-      _todoList = SampleTodoData.sampleList.where((item) => item.title.toLowerCase().contains(_keyword!.toLowerCase())).toList();
-    } else {
-      _todoList = [];
-    }
-    _streamController.sink.add(_todoList);
-  }
 
   void _setSearchKeyword(String keyword) {
     if (_keyword != keyword) {
@@ -66,7 +59,7 @@ class _SearchScheduleViewState extends State<SearchScheduleView> {
           onSubmit: (value) {
             if (value.isNotEmpty) {
               _setSearchKeyword(_controller.text.trim());
-              _setList();
+              sqflite.todoSearch(keyword: _keyword);
               FocusScope.of(context).unfocus();
             }
           },
@@ -75,12 +68,12 @@ class _SearchScheduleViewState extends State<SearchScheduleView> {
             setState(() {
               _keyword = null;
             });
-            _setList();
+            sqflite.todoSearch(keyword: _keyword);
           },
         ),
       ),
-      body: StreamBuilder(
-        stream: _streamController.stream,
+      body: StreamBuilder<List<InternalTodoRespDto>>(
+        stream: sqflite.searchStream,
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('${SampleTodoData.sampleList.length}개의 일정이 있습니다.'));
