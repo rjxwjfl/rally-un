@@ -1,5 +1,7 @@
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:rally/configs/style_config.dart';
 
 class ScheduleMonthView extends StatelessWidget {
   const ScheduleMonthView({super.key});
@@ -10,9 +12,19 @@ class ScheduleMonthView extends StatelessWidget {
     return MonthView(
       borderSize: 0.2,
       borderColor: scheme.outline,
-      cellBuilder: (date, events, isToday, isMonth, isYear){
+      headerStyle: HeaderStyle(
+        headerTextStyle: StyleConfigs.titleBold,
+        decoration: BoxDecoration(
+          color: scheme.background,
+        ),
+      ),
+      startDay: WeekDays.sunday,
+      cellBuilder: (date, events, isToday, isMonth, isYear) {
         return Container(
-          child: Text('${date.day}'),
+          child: Text(
+            '${date.day}',
+            textAlign: TextAlign.center,
+          ),
         );
       },
     );

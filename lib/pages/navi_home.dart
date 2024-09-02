@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rally/configs/style_config.dart';
 import 'package:rally/main.dart';
-import 'package:rally/pages/components/bottom_navigation/navigation_components.dart';
+import 'package:rally/pages/components/bottom_navigation/navigation_items.dart';
 import 'package:rally/pages/schedule/todo/todo_add_bottom_sheet.dart';
 import 'package:rally/widget/bottom_sheet/schedule_todo_bottom_sheet.dart';
 import 'package:rally/widget/custom_bottom_navigation_bar/custom_bottom_navigation_bar.dart';
@@ -64,7 +64,9 @@ class _NaviHomeState extends State<NaviHome> {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme scheme = Theme.of(context).colorScheme;
+    ColorScheme scheme = Theme
+        .of(context)
+        .colorScheme;
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
@@ -90,43 +92,6 @@ class _NaviHomeState extends State<NaviHome> {
           iconSize: 24.0,
           pageController: _pageController,
           items: navigationItems,
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => FormedBottomSheet.defaultBottomSheet(
-            context: context,
-            builder: (context) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _getActionButton(onTap: () {}, icon: Icons.edit_outlined, text: '메모'),
-                _getActionButton(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    FormedBottomSheet.defaultBottomSheet(context: context, builder: (context) => const TodoAddBottomSheet());
-                  },
-                  icon: Icons.add_task_outlined,
-                  text: '할 일',
-                ),
-                _getActionButton(onTap: () {}, icon: Icons.edit_calendar_outlined, text: '일정'),
-              ],
-            ),
-          ),
-          mini: true,
-          child: Icon(Icons.add),
-        ),
-      ),
-    );
-  }
-
-  Widget _getActionButton({required void Function() onTap, required IconData icon, required String text}) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(text, style: StyleConfigs.bodyNormal),
-          ],
         ),
       ),
     );

@@ -34,7 +34,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     IconThemeData defaultIconTheme = IconThemeData(
         size: widget.activeIconSize ?? widget.iconSize ?? 24.0, color: widget.activeIconColor ?? scheme.onSurface, opacity: 0.8);
     return Container(
-      height: 56.0,
+      height: kToolbarHeight * 1.3,
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
       decoration: BoxDecoration(
         color: scheme.background,

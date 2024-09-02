@@ -48,6 +48,7 @@ class NavigationComponent extends StatelessWidget {
                 ),
             ],
           ),
+          if (item.label != null)Text(item.label!)
         ],
       ),
     );

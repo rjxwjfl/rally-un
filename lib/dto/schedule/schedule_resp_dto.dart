@@ -10,8 +10,9 @@ class ScheduleRespDto {
   AuthorRespDto author;
   String title;
   String? desc;
+  int priority;
   DateTime startDate;
-  DateTime? endDate;
+  DateTime endDate;
   DateTime createdDate;
   DateTime updatedDate;
   List<TodoRespDto>? todo;
@@ -31,8 +32,9 @@ class ScheduleRespDto {
     required this.author,
     required this.title,
     this.desc,
+    required this.priority,
     required this.startDate,
-    this.endDate,
+    required this.endDate,
     required this.createdDate,
     required this.updatedDate,
     this.todo,
@@ -59,8 +61,9 @@ class ScheduleRespDto {
       author: AuthorRespDto.fromMap(map['author']),
       title: map['title'] as String,
       desc: map['desc'] != null ? map['desc'] as String : null,
+      priority: map['priority'] as int,
       startDate: sqlToDateTime(map['start_date']),
-      endDate: map['end_date'] != null ? sqlToDateTime(map['end_date']) : null,
+      endDate: sqlToDateTime(map['end_date']),
       createdDate: sqlToDateTime(map['created_date']),
       updatedDate: sqlToDateTime(map['updated_date']),
       todo: todoData.map((e) => TodoRespDto.fromMap(e)).toList(),

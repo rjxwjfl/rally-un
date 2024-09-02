@@ -14,9 +14,9 @@ String ymdFormatter(DateTime date) =>
 String ahmFormatter(DateTime date) =>
     DateFormat(DateFormat.HOUR_MINUTE_TZ, Platform.localeName).format(date);
 
-String mdahmFormatter(DateTime date) => DateFormat('MM. dd. a hh:mm', Platform.localeName).format(date);
+String mdahmFormatter(DateTime date) => DateFormat('MM. dd. HH:mm', Platform.localeName).format(date);
 
-String todoTimeFormat(DateTime date) => DateFormat('a hh:mm', Platform.localeName).format(date);
+String todoTimeFormat(DateTime date) => DateFormat('HH:mm', Platform.localeName).format(date);
 
 String todoDateAndTimeFormat(DateTime date) => DateFormat('d a hh:mm', Platform.localeName).format(date);
 

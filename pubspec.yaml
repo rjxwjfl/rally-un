@@ -52,6 +52,8 @@ dependencies:
   animated_icon: ^0.0.9
   calendar_view: ^1.2.0
   sqflite: ^2.3.3+1
+  month_year_picker: ^0.4.0+1
+  month_picker_dialog: ^5.0.0
 
 dev_dependencies:
   flutter_test:

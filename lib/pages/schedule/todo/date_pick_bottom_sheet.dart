@@ -138,9 +138,9 @@ class _DatePickBottomSheetState extends State<DatePickBottomSheet> {
                       _isSelected = !_isSelected;
                       if (_isSelected) {
                         DateTime now = DateTime.now();
-                        _startTime = TimeOfDay(hour: now.hour, minute: now.minute);
+                        // _startTime = TimeOfDay(hour: now.hour, minute: now.minute);
                         _endTime = TimeOfDay(hour: now.hour + 1, minute: now.minute);
-                        _startDate = _combineDateAndTime(_startDate, _startTime);
+                        // _startDate = _combineDateAndTime(_startDate, _startTime);
                         _endDate = _combineDateAndTime(_startDate, _endTime);
                       } else {
                         _startDate = _startDate.withoutTime;
@@ -161,35 +161,35 @@ class _DatePickBottomSheetState extends State<DatePickBottomSheet> {
                               Expanded(
                                 child: Column(
                                   children: [
-                                    FormedWidgetComponent(
-                                      prefix: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                        child: Icon(Icons.not_started_outlined,
-                                            size: 18.0, color: Theme.of(context).colorScheme.outline.withOpacity(0.8)),
-                                      ),
-                                      title: Text('시작', style: StyleConfigs.bodyNormal),
-                                      suffix: CustomButton(
-                                        onTap: () async {
-                                          final res = await showTimePicker(
-                                              context: context,
-                                              initialTime: _startTime,
-                                              initialEntryMode: TimePickerEntryMode.dial);
-                                          if (res != null) {
-                                            setState(() {
-                                              _startTime = res;
-                                              _startDate = _combineDateAndTime(_startDate, _startTime);
-                                              if (_startDate.isAfter(_endDate)) {
-                                                _endTime = res.replacing(hour: res.hour + 1);
-                                                _endDate = _combineDateAndTime(_endDate, _endTime);
-                                              }
-                                            });
-                                          }
-                                        },
-                                        padding: const EdgeInsets.all(8.0),
-                                        text: _timeIndicator(_startDate),
-                                        textColor: scheme.primary,
-                                      ),
-                                    ),
+                                    // FormedWidgetComponent(
+                                    //   prefix: Padding(
+                                    //     padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                    //     child: Icon(Icons.not_started_outlined,
+                                    //         size: 18.0, color: Theme.of(context).colorScheme.outline.withOpacity(0.8)),
+                                    //   ),
+                                    //   title: Text('시작', style: StyleConfigs.bodyNormal),
+                                    //   suffix: CustomButton(
+                                    //     onTap: () async {
+                                    //       final res = await showTimePicker(
+                                    //           context: context,
+                                    //           initialTime: _startTime,
+                                    //           initialEntryMode: TimePickerEntryMode.dial);
+                                    //       if (res != null) {
+                                    //         setState(() {
+                                    //           _startTime = res;
+                                    //           _startDate = _combineDateAndTime(_startDate, _startTime);
+                                    //           if (_startDate.isAfter(_endDate)) {
+                                    //             _endTime = res.replacing(hour: res.hour + 1);
+                                    //             _endDate = _combineDateAndTime(_endDate, _endTime);
+                                    //           }
+                                    //         });
+                                    //       }
+                                    //     },
+                                    //     padding: const EdgeInsets.all(8.0),
+                                    //     text: _timeIndicator(_startDate),
+                                    //     textColor: scheme.primary,
+                                    //   ),
+                                    // ),
                                     FormedWidgetComponent(
                                       prefix: Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -199,36 +199,36 @@ class _DatePickBottomSheetState extends State<DatePickBottomSheet> {
                                       title: Text('종료', style: StyleConfigs.bodyNormal),
                                       suffix: Row(
                                         children: [
-                                          CustomButton(
-                                            onTap: () async {
-                                              final res = await showDatePicker(
-                                                context: context,
-                                                currentDate: _endDate,
-                                                initialDate: _endDate,
-                                                firstDate: _startDate,
-                                                lastDate: DateTime(2100, 12, 31),
-                                                initialEntryMode: DatePickerEntryMode.calendarOnly,
-                                                locale: getLocale()
-                                              );
-                                              if (res != null) {
-                                                setState(() {
-                                                  _endDate = _combineDateAndTime(res, _endTime);
-
-                                                  if (_endDate.withoutTime == _startDate.withoutTime) {
-                                                    // If endDate is the same as startDate
-                                                    if (_endTime.hour < _startTime.hour || (_endTime.hour == _startTime.hour && _endTime.minute <= _startTime.minute)) {
-                                                      // Automatically set endTime to 1 hour after startTime
-                                                      _endTime = _startTime.replacing(hour: _startTime.hour + 1);
-                                                      _endDate = _combineDateAndTime(_endDate, _endTime);
-                                                    }
-                                                  }
-                                                });
-                                              }
-                                            },
-                                            padding: const EdgeInsets.all(8.0),
-                                            text: _dateIndicator(),
-                                            textColor: scheme.primary,
-                                          ),
+                                          // CustomButton(
+                                          //   onTap: () async {
+                                          //     final res = await showDatePicker(
+                                          //       context: context,
+                                          //       currentDate: _endDate,
+                                          //       initialDate: _endDate,
+                                          //       firstDate: _startDate,
+                                          //       lastDate: DateTime(2100, 12, 31),
+                                          //       initialEntryMode: DatePickerEntryMode.calendarOnly,
+                                          //       locale: getLocale()
+                                          //     );
+                                          //     if (res != null) {
+                                          //       setState(() {
+                                          //         _endDate = _combineDateAndTime(res, _endTime);
+                                          //
+                                          //         if (_endDate.withoutTime == _startDate.withoutTime) {
+                                          //           // If endDate is the same as startDate
+                                          //           if (_endTime.hour < _startTime.hour || (_endTime.hour == _startTime.hour && _endTime.minute <= _startTime.minute)) {
+                                          //             // Automatically set endTime to 1 hour after startTime
+                                          //             _endTime = _startTime.replacing(hour: _startTime.hour + 1);
+                                          //             _endDate = _combineDateAndTime(_endDate, _endTime);
+                                          //           }
+                                          //         }
+                                          //       });
+                                          //     }
+                                          //   },
+                                          //   padding: const EdgeInsets.all(8.0),
+                                          //   text: _dateIndicator(),
+                                          //   textColor: scheme.primary,
+                                          // ),
                                           CustomButton(
                                             onTap: () async {
                                               final res = await showTimePicker(

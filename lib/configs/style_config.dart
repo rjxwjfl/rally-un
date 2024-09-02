@@ -41,11 +41,11 @@ class StyleConfigs {
 
   static TextStyle extraSmall = const TextStyle(fontSize: 10.0);
 
-  static Container menuTitleFocus({required Color color, required double height, double width = 4.0}) {
+  static Container menuTitleFocus({required Color color, required double height, double width = 4.0, double? borderRadius}) {
     return Container(
       height: height,
       width: width,
-      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.all(Radius.circular(width * 0.5))),
+      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? width * 0.5))),
     );
   }
 }
